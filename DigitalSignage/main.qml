@@ -6,15 +6,65 @@ Window {
     width: 360
     height: 360
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            Qt.quit();
+    Loader
+    {
+        id:loadIdle
+    }
+    Loader
+    {
+        id:loadKeyboard
+    }
+
+    MouseArea
+    {
+        id:ma
+        anchors.horizontalCenter: parent.horizontalCenter
+        y:50
+        width:100
+        height:40
+        onClicked:
+        {
+            loadIdle.source="qrc:///idle.qml"
+        }
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: "#EAEAEA"
+            border.color: "black"
+            Text
+            {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Idle"
+                font.pixelSize: 30
+            }
         }
     }
 
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+    MouseArea
+    {
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: ma.y+ma.height+20
+        width:180
+        height:40
+
+        onClicked:
+        {
+            loadIdle.source="qrc:///OSkeyboard.qml"
+        }
+
+        Rectangle
+        {
+            border.color: "black"
+            anchors.fill: parent
+            color: "#EAEAEA"
+            Text
+            {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "OSKeyboard"
+                font.pixelSize: 30
+            }
+        }
     }
+
 }

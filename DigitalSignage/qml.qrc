@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>idle.qml</file>
+        <file>OSkeyboard.qml</file>
     </qresource>
 </RCC>
