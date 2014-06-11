@@ -9,63 +9,79 @@ Window {
     //height: 360
 
     property int yy:0
+    property bool flag_done:false
+
+    Text
+    {
+        z:1000
+        text: yy
+        x:0
+        y:0
+        font.pixelSize: 70
+    }
 
     onAfterRendering:
     {
-        console.debug("jooooooooooonnn")
+
         wdw.showFullScreen()
         timer1.start()
-        var rndom
-        for (var i=0; i<30; i++)
+
+
+        if (!flag_done)
         {
-            rndom = Math.floor((Math.random() * 14) + 1);
-            switch (rndom)
+            console.debug("jooooooooooonnn")
+            flag_done=true
+            load_image()
+        }
+    }
+
+    function load_image()
+    {
+        var rndom1,rndom2
+        var buf=3
+        for (var i=0; i<200; i++)
+        {
+            do
+            {
+                rndom1 = Math.floor((Math.random() * 6) + 1);
+            }while(buf===rndom1)
+            rndom2 = Math.floor((Math.random() * 3) + 1);
+
+            buf=rndom1
+            switch (rndom1)
             {
             case 1:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/biru.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                if (rndom2===1) opoModel.append({"gambar":"http://192.168.1.123/abstract/biru.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                else if (rndom2===2) opoModel.append({"gambar":"http://192.168.1.123/abstract/biru.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
+                else opoModel.append({"gambar":"http://192.168.1.123/abstract/biru.jpg","gambart":"http://192.168.1.123/abstract/trans3.png"})
                 break
             case 2:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/ijo.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                if (rndom2===1) opoModel.append({"gambar":"http://192.168.1.123/abstract/coklat.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                else if (rndom2===2) opoModel.append({"gambar":"http://192.168.1.123/abstract/coklat.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
+                else opoModel.append({"gambar":"http://192.168.1.123/abstract/coklat.jpg","gambart":"http://192.168.1.123/abstract/trans3.png"})
                 break
             case 3:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/kuning.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                if (rndom2===1) opoModel.append({"gambar":"http://192.168.1.123/abstract/ijo.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                else if (rndom2===2) opoModel.append({"gambar":"http://192.168.1.123/abstract/ijo.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
+                else opoModel.append({"gambar":"http://192.168.1.123/abstract/ijo.jpg","gambart":"http://192.168.1.123/abstract/trans3.png"})
                 break
             case 4:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/orange.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                if (rndom2===1) opoModel.append({"gambar":"http://192.168.1.123/abstract/kuning.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                else if (rndom2===2) opoModel.append({"gambar":"http://192.168.1.123/abstract/kuning.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
+                else opoModel.append({"gambar":"http://192.168.1.123/abstract/kuning.jpg","gambart":"http://192.168.1.123/abstract/trans3.png"})
                 break
             case 5:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/ungu.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                if (rndom2===1) opoModel.append({"gambar":"http://192.168.1.123/abstract/orange.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                else if (rndom2===2) opoModel.append({"gambar":"http://192.168.1.123/abstract/orange.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
+                else opoModel.append({"gambar":"http://192.168.1.123/abstract/orange.jpg","gambart":"http://192.168.1.123/abstract/trans3.png"})
                 break
             case 6:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/coklat.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
-                break
-            case 7:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/ijo.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
-                break
-            case 8:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/biru.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
-                break
-            case 9:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/ijo.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
-                break
-            case 10:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/kuning.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
-                break
-            case 11:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/orange.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
-                break
-            case 12:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/ungu.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
-                break
-            case 13:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/coklat.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
-                break
-            case 14:
-                opoModel.append({"gambar":"http://192.168.1.123/abstract/biru.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
+                if (rndom2===1) opoModel.append({"gambar":"http://192.168.1.123/abstract/ungu.jpg","gambart":"http://192.168.1.123/abstract/trans.png"})
+                else if (rndom2===2) opoModel.append({"gambar":"http://192.168.1.123/abstract/ungu.jpg","gambart":"http://192.168.1.123/abstract/trans2.png"})
+                else opoModel.append({"gambar":"http://192.168.1.123/abstract/ungu.jpg","gambart":"http://192.168.1.123/abstract/trans3.png"})
                 break
             }
         }
-
     }
 
     /* Timer
@@ -73,49 +89,53 @@ Window {
     */
     Timer {
         id:timer1
-        interval: 200
+        interval: 50
         onTriggered:
         {
             yy++
+            if(yy%700===0) flag_done=false
             gridView1.contentY = yy
 
             //console.debug("oi="+yy)
         }
     }
-//    Rectangle
-//    {
-//        anchors.horizontalCenter: wdw.horizontalCenter
-//        x:100
-//        height:768
-//        width:50
-//        MediaPlayer {
-//            id: player
-//            source: "http://192.168.1.123/vid/drag.mp4"
-//            autoPlay: true
-//        }
 
-//        VideoOutput {
-//            orientation: 90
-//            id: videoOutput
-//            source: player
-//            anchors.fill: parent
-//        }
-//    }
-
-        Video
+    Rectangle
+    {
+        id:rect1
+        x:(parent.width/2)-(rect1.width/2)
+        y:20
+        height:400
+        width:parent.width
+        MediaPlayer
         {
-            id:pid
-            z:100
-            x:0
-            y:100
-            fillMode: VideoOutput.Stretch
-            autoLoad: true
-            autoPlay: true
-            width: 768
-            height: 100
+            id: player
             source: "http://192.168.1.123/vid/drag.mp4"
-            focus : true
+            autoPlay: true
         }
+
+        VideoOutput
+        {
+            id: videoOutput
+            source: player
+            anchors.fill: parent
+        }
+    }
+
+//        Video
+//        {
+//            id:pid
+//            z:100
+//            x:0
+//            y:100
+//            fillMode: VideoOutput.Stretch
+//            autoLoad: true
+//            autoPlay: true
+//            width: 768
+//            height: 100
+//            source: "http://192.168.1.123/vid/drag.mp4"
+//            focus : true
+//        }
 
     GridView {
         z:-1
@@ -131,7 +151,7 @@ Window {
         interactive : false
         Behavior on y
         {
-            NumberAnimation{ duration: 200; easing.type: Easing.Linear}
+            NumberAnimation{ duration: 50; easing.type: Easing.Linear}
         }
         //cellWidth: 70
         model: opoModel
