@@ -26,7 +26,7 @@ Window {
         //makecurrent()
         wdw.showFullScreen()
         timer1.start()
-        timer2.start()
+        //timer2.start()
 
         if (!flag_done)
         {
@@ -101,13 +101,29 @@ Window {
         }
     }
 
-    Timer
+    //    Timer
+    //    {
+    //        id: timer2
+    //        interval: 1000
+    //        onTriggered:
+    //        {
+    //           rect1.y+=100
+    //        }
+    //    }
+    Rectangle
     {
-        id: timer2
-        interval: 1000
-        onTriggered:
+        y:rect1.y-146
+        color:"transparent"
+        width:parent.width
+        height: 900
+        Image
         {
-           rect1.y+=100
+            anchors.fill: parent
+            z:5
+            id:background_vid
+            source: "http://192.168.1.123/abstract/video_trans.png"
+            opacity: 30
+
         }
     }
 
@@ -116,20 +132,12 @@ Window {
         id:rect1
         x:(parent.width/2)-(rect1.width/2)
         color:"transparent"
-        //y:20
+        y:100
         height:608
         width:parent.width
         Behavior on y { SpringAnimation { spring: 10; damping: 0.1 } }
 
-        Image
-        {
-            z:5
-            anchors.fill: parent
-            id:background_vid
-            source: "http://192.168.1.123/abstract/video_trans.png"
-            opacity: 30
 
-        }
 
         MediaPlayer
         {
@@ -149,20 +157,20 @@ Window {
         }
     }
 
-//        Video
-//        {
-//            id:pid
-//            z:100
-//            x:0
-//            y:100
-//            fillMode: VideoOutput.Stretch
-//            autoLoad: true
-//            autoPlay: true
-//            width: 768
-//            height: 100
-//            source: "http://192.168.1.123/vid/drag.mp4"
-//            focus : true
-//        }
+    //        Video
+    //        {
+    //            id:pid
+    //            z:100
+    //            x:0
+    //            y:100
+    //            fillMode: VideoOutput.Stretch
+    //            autoLoad: true
+    //            autoPlay: true
+    //            width: 768
+    //            height: 100
+    //            source: "http://192.168.1.123/vid/drag.mp4"
+    //            focus : true
+    //        }
 
     GridView {
         z:-1
