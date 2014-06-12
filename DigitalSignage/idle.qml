@@ -1,7 +1,7 @@
 import QtQuick 2.2
 import QtQuick.Window 2.1
 import QtMultimedia 5.0
-
+import QtQuick.XmlListModel 2.0
 
 Window {
     id:wdw
@@ -23,7 +23,7 @@ Window {
 
     onAfterRendering:
     {
-
+        //makecurrent()
         wdw.showFullScreen()
         timer1.start()
         timer2.start()
@@ -115,13 +115,25 @@ Window {
     {
         id:rect1
         x:(parent.width/2)-(rect1.width/2)
+        color:"transparent"
         //y:20
-        height:607
+        height:608
         width:parent.width
         Behavior on y { SpringAnimation { spring: 10; damping: 0.1 } }
 
+        Image
+        {
+            z:5
+            anchors.fill: parent
+            id:background_vid
+            source: "http://192.168.1.123/abstract/video_trans.png"
+            opacity: 30
+
+        }
+
         MediaPlayer
         {
+
             id: player
             source: "http://192.168.1.123/vid/drag.mp4"
             autoPlay: true
@@ -129,6 +141,7 @@ Window {
 
         VideoOutput
         {
+            z:6
             id: videoOutput
             source: player
             fillMode: VideoOutput.Stretch
