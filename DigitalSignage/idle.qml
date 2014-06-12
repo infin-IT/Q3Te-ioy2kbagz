@@ -221,7 +221,8 @@ Window {
         {
 
             id: player
-            source: "http://192.168.1.123/vid/drag.mp4"
+            //source: "http://192.168.1.123/vid/drag.mp4"
+            source:"file:///E:/#infinIT/Video/drag.mp4"
             autoPlay: true
         }
 
