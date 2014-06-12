@@ -23,17 +23,54 @@ Window {
 //        font.pixelSize: 70
 //    }
 
+    //Background Image Transparent
+    Image
+    {
+        id:backgroundInformasi
+        z:5
+        x:(parent.width/2)-(backgroundInformasi.width/2)
+        y:bayanganVideo.y+bayanganVideo.width
+        width:parent.width
+        height:500
+        source:"http://192.168.1.123/abstract/informasi_trans.png"
+    }
 
     //Waktu
     Text
     {
         id:txtWaktu
-        z:100
+        z:6
+        color:"white"
         x:(parent.width/2)-(txtWaktu.width/2)
-        y:
+        y:bayanganVideo.y+bayanganVideo.width+100
         text:Qt.formatTime(new Date(),"hh:mm")
         font.family: argh.name
-        font.pixelSize: 90
+        font.pixelSize: 130
+    }
+
+    //Tanggal
+    Text
+    {
+        id:txtTanggal
+        z:6
+        color:"white"
+        x:(parent.width/2)-(txtWaktu.width/2)+100
+        y:bayanganVideo.y+bayanganVideo.width+txtWaktu.height+110
+        text:Qt.formatDate(new Date(),"dddd, dd MMMM yyyy")
+        font.family: argh.name
+        font.pixelSize: 30
+    }
+
+    Timer
+    {
+        id:timerWaktu
+        interval: 60000
+        repeat: true
+        running: true
+        onTriggered:
+        {
+            txtWaktu.text=Qt.formatTime(new Date(),"hh:mm")
+        }
     }
 
     onAfterRendering:
@@ -111,7 +148,6 @@ Window {
             yy++
             if(yy%300===0) flag_done=false
             gridView1.contentY = yy
-
             //console.debug("oi="+yy)
         }
     }
