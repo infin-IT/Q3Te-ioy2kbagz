@@ -12,6 +12,20 @@ Window {
     property int yy:0
     property bool flag_done:false
 
+    function getLocationX(percentage)
+    {
+        var x=0;
+        x=(percentage/100)*wdw.width
+        console.log("x= "+x);
+        return x;
+    }
+    function getLocationY(percentage)
+    {
+        var y=0;
+        y=(percentage/100)*wdw.height
+        console.log("y= "+y);
+        return y;
+    }
 
     FontLoader { id: argh; source: "Aaargh.ttf" }
 
@@ -29,8 +43,8 @@ Window {
     {
         id:backgroundInformasi
         z:4
-        x:(parent.width/2)-(backgroundInformasi.width/2)
-        y:bayanganVideo.y+bayanganVideo.width
+        x:getLocationX(50)-(backgroundInformasi.width/2)
+        y:getLocationY(54)
         width:parent.width
         height:500
         source:"http://192.168.1.123/abstract/informasi_trans.png"
@@ -40,26 +54,36 @@ Window {
     Image
     {
         id:imgWeather
-        z:5
-        x:(parent.width/2)-(imgWeather.width/2)-140
+        z:5        
         width:200
         height:190
-        y:bayanganVideo.y+bayanganVideo.height+60
+        x:getLocationX(23)
+        y:getLocationY(63)
         source:"http://192.168.1.123/abstract/weather.png"
     }
 
     //Suhu
-    Text
+    GridView
     {
-        id:txtSuhu
-        z:6
-        x:(parent.width/2)-(txtSuhu.width/2)-100
-        y:imgWeather.y+imgWeather.height
-        color:"white"
-        text:suhu
-        font.family: argh.name
-        font.pixelSize: 60
+        visible:true
+        id: gv1
+        x:getLocationX(20)
+        y:getLocationY(70)
+        z:7
+        model:weatherModel
+        delegate:
+        Item
+        {
+            Text
+            {
+                text:(Math.floor((5/9) * (suhu-32)))+"ºC"
+                font.pixelSize: 40
+                color:"white"
+                z:6
+            }
+        }
     }
+
 
     //Waktu
     Text
@@ -67,8 +91,8 @@ Window {
         id:txtWaktu
         z:6
         color:"white"
-        x:(parent.width/2)-(txtWaktu.width/2)
-        y:bayanganVideo.y+bayanganVideo.width+100
+        x:getLocationX(50)-(txtWaktu.width/2)
+        y:getLocationY(62)
         text:Qt.formatTime(new Date(),"hh:mm")
         font.family: argh.name
         font.pixelSize: 130
@@ -80,8 +104,8 @@ Window {
         id:txtTanggal
         z:6
         color:"white"
-        x:(parent.width/2)-(txtWaktu.width/2)+100
-        y:bayanganVideo.y+bayanganVideo.width+txtWaktu.height+110
+        x:getLocationX(50)-(txtWaktu.width/2)+60
+        y:getLocationY(70)
         text:Qt.formatDate(new Date(),"dddd, dd MMMM yyyy")
         font.family: argh.name
         font.pixelSize: 30
@@ -210,19 +234,16 @@ Window {
         id:rect1
         x:(parent.width/2)-(rect1.width/2)
         color:"transparent"
-        y:100
+        y:getLocationY(5)
         height:608
         width:parent.width
-        Behavior on y { SpringAnimation { spring: 10; damping: 0.1 } }
-
-
-
+        Behavior on y { SpringAnimation { spring: 20; damping: 0.1 } }
         MediaPlayer
         {
 
             id: player
             //source: "http://192.168.1.123/vid/drag.mp4"
-            source:"file:///E:/#infinIT/Video/drag.mp4"
+            source:"file:///E:/drag.mp4"
             autoPlay: true
         }
 
@@ -274,6 +295,7 @@ Window {
         {
         width:gridView1.cellWidth
         height:gridView1.cellHeight
+
         Image
         {
             z:0
@@ -292,12 +314,26 @@ Window {
 
 ListModel
 {
-    id:opoModel
+    id:opoModel     
 }
+    Timer
+    {
+        id:timerUpdateXml
+        interval: 1000
+        repeat: true
+        running: true
+        onTriggered:
+        {
+            console.log("--->>> timer update")
+            weatherModel.source=""
+            weatherModel.source="http://localhost/forecastrss.xml"
+        }
+    }
 
 XmlListModel {
     id: weatherModel
     source: "http://weather.yahooapis.com/forecastrss?w=1048262"
+    //source: "http://localhost/forecastrss.xml"
     query: "/rss/channel"
 
     //current condition
