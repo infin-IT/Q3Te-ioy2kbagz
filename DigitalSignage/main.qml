@@ -5,6 +5,7 @@ Window {
     visible: true
     width: 360
     height: 360
+    id:wdw
 
     Loader
     {

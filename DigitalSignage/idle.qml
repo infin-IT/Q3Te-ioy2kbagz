@@ -118,6 +118,7 @@ Window {
         {
             id: videoOutput
             source: player
+            fillMode: VideoOutput.Stretch
             anchors.fill: parent
         }
     }
