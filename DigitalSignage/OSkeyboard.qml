@@ -10,7 +10,11 @@ Window {
     property bool isGenerated:false;
     function generatePad()
     {
-        //for(var i=0;i<)
+
+        for(var i=0;i<10;i++)
+        {
+            numPad.append({"name":i+'0',"colorCode":"black"});
+        }
 
     }
 
@@ -19,43 +23,58 @@ Window {
         if(!isGenerated)
         {
             isGenerated=true;
-            numPad.append({"name":"a","colorCode":"blue"});
+            generatePad();
         }
-
-
     }
 
     GridView {
         id: gridNum
-        x: 0
-        y: 0
-        width: 500
-        height: 500
-        cellWidth: 50
-        cellHeight: 50
-        delegate: Item {
-            x: 5
-            height: 50
-            Column {
-                Rectangle {
-                    width: 40
-                    height: 40
-                    color: colorCode
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
+        x: parent.x+50
+        y: parent.y
 
+        width: 300
+        height: 300
+        cellWidth: 100
+        cellHeight: 100
+        delegate: Item {
+            x:0
+            y:0
+            width: 100
+            height: 100
+            Rectangle {
+                x:0
+                y:0
+                anchors.fill: parent
+                color:"transparent"
+                Image {
+                    id: bg
+                    source: "http://192.168.1.123/buttonKeyboard/unPressed.png"
+                    anchors.fill: parent
+                }
+                anchors.horizontalCenter: parent.horizontalCenter
                 Text {
-                    x: 5
+                    color:"white"
                     text: name
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.centerIn: parent
                     font.bold: true
                 }
-                spacing: 5
+                MouseArea
+                {
+                    id:msArea
+                    anchors.fill:parent
+                    onPressed:
+                    {
+                        bg.source="http://192.168.1.123/buttonKeyboard/Pressed.png"
+                    }
+                    onReleased:
+                    {
+                        bg.source="http://192.168.1.123/buttonKeyboard/unPressed.png"
+                    }
+                }
             }
         }
         model:
-
-        ListModel {
+            ListModel {
             id:numPad
         }
     }
