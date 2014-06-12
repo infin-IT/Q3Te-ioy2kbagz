@@ -8,17 +8,32 @@ Window {
     visible: true
     //width: 360
     //height: 360
-
     property int yy:0
     property bool flag_done:false
 
+
+    FontLoader { id: argh; source: "Aaargh.ttf" }
+
+//    Text
+//    {
+//        z:1000
+//        text: yy
+//        x:0
+//        y:0
+//        font.pixelSize: 70
+//    }
+
+
+    //Waktu
     Text
     {
-        z:1000
-        text: yy
-        x:0
-        y:0
-        font.pixelSize: 70
+        id:txtWaktu
+        z:100
+        x:(parent.width/2)-(txtWaktu.width/2)
+        y:
+        text:Qt.formatTime(new Date(),"hh:mm")
+        font.family: argh.name
+        font.pixelSize: 90
     }
 
     onAfterRendering:
@@ -112,6 +127,7 @@ Window {
     //    }
     Rectangle
     {
+        id:bayanganVideo
         y:rect1.y-146
         color:"transparent"
         width:parent.width
