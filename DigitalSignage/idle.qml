@@ -2,6 +2,7 @@ import QtQuick 2.2
 import QtQuick.Window 2.1
 import QtMultimedia 5.0
 
+
 Window {
     id:wdw
     visible: true
@@ -25,7 +26,7 @@ Window {
 
         wdw.showFullScreen()
         timer1.start()
-
+        timer2.start()
 
         if (!flag_done)
         {
@@ -39,7 +40,7 @@ Window {
     {
         var rndom1,rndom2
         var buf=3
-        for (var i=0; i<200; i++)
+        for (var i=0; i<300; i++)
         {
             do
             {
@@ -93,10 +94,20 @@ Window {
         onTriggered:
         {
             yy++
-            if(yy%700===0) flag_done=false
+            if(yy%300===0) flag_done=false
             gridView1.contentY = yy
 
             //console.debug("oi="+yy)
+        }
+    }
+
+    Timer
+    {
+        id: timer2
+        interval: 1000
+        onTriggered:
+        {
+           rect1.y+=100
         }
     }
 
@@ -104,9 +115,11 @@ Window {
     {
         id:rect1
         x:(parent.width/2)-(rect1.width/2)
-        y:20
-        height:400
+        //y:20
+        height:607
         width:parent.width
+        Behavior on y { SpringAnimation { spring: 10; damping: 0.1 } }
+
         MediaPlayer
         {
             id: player
@@ -182,4 +195,18 @@ ListModel
     id:opoModel
 }
 
+XmlListModel {
+    source: "http://www.google.com/ig/api?weather=Salatiga"
+    query: "/xml_api_reply/weather/current_conditions"
+
+    //current condition
+    XmlRole { name: "condition"; query: "condition/@data/string()" }
+    XmlRole { name: "temp_c"; query: "temp_c/@data/string()" }
+    XmlRole { name: "humidity"; query: "humidity/@data/string()" }
+    XmlRole { name: "icon"; query: "icon/@data/string()" }
+    XmlRole { name: "wind_condition"; query: "wind_condition/@data/string()" }
 }
+
+}
+
+
