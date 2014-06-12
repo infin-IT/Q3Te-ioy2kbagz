@@ -6,5 +6,5 @@ Window {
     height: 300
     visible: true
     title: "OSKeyboard"
-    color: "blue"
+    color: "green"
 }
